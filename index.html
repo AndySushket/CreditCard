@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="style/style.css">
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+<div class="content">
+<div class="flip-container" ng-class="flip" >
+	<div class="flipper">
+		<div class="front">
+			<div class="card">
+				<div ng-class="background" class="background"></div>
+				<div class="card__sim"></div>
+				<div ng-class="card__number_bullets">
+					{{creditNumber}}
+				</div>
+				<div class="card__little-valid">
+					valid thru
+				</div>
+				<div class="card__little-letter">
+					Month/Year
+				</div>
+				<div class="card__expiration">
+					<div class="card__date" ng-class="huge_points">{{creditDate}}
+					</div>
+				</div>
+				<div class="card__name">
+					{{fulltName}}
+				</div>
+				<div class="card__type" ng-class="status">
+				</div>
+
+			</div>
+		</div>
+		<div class="back">
+			<div class="card" ng-class="background" class="background">
+				<div class="card__black"></div>
+				<div class="card__skyblue"></div>
+				<div class="card__cvv"  ng-class="huge_points_cvc">
+					{{cvc}}
+				</div>
+				<div class="card__sim"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<form>
+	<div id="front">
+		<div class="block">
+			<label for="number">Card Number</label>
+			<input id="number" type="text" maxlength="16" ng-change="validateNumber()" ng-model="number" placeholder="Card Number"/>
+		</div>
+		<div class="block">
+			<label for="name">Full Name</label>
+			<input id="name" type="text" maxlength="20" placeholder="Full Name" ng-model="fulltName"/>
+		</div>
+		<div class="block">
+			<label for="month">Expiry</label>
+			<input id="month" type="text" maxlength="5" placeholder="MM/YY" ng-change="validateMonth()"  ng-model="date" />
+		</div>
+	</div>
+	<div id="back">
+		<div class="block">
+			<label for="cvv">CVC</label>
+			<input id="cvv" type="text" maxlength="3" placeholder="CVV" ng-focus="showCVC()" ng-blur="hideCVC()" ng-change="validateCVC()" ng-model="cvc"/>
+		</div>
+	</div>
+</form>
+</div>
+</body>
+
+<script src="app/app.js"></script>
+</html>
