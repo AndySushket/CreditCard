@@ -1,19 +1,19 @@
 var app = angular.module('myApp', []);
-app.controller("myCtrl",function ($scope,$filter) {
-	$scope.status="";
-	$scope.card__number_bullets="card__number_bullets";
-	$scope.huge_points="huge_points";
-	$scope.huge_points_cvc="huge_points_cvc";
+app.controller("myCtrl", ($scope) => {
+	$scope.status = "";
+	$scope.card__number_bullets = "card__number_bullets";
+	$scope.huge_points = "huge_points";
+	$scope.huge_points_cvc = "huge_points_cvc";
 
-	$scope.validateNumber=function () {
+	$scope.validateNumber= () => {
 		var cardCode = $scope.number.replace(/[^\d]/g, '').substring(0,16);
-		$scope.number= cardCode;
+		$scope.number = cardCode;
 		cardCode = cardCode !== '' ? cardCode.match(/.{1,4}/g).join(' ') : '';
 		$scope.creditNumber = cardCode;
-		if($scope.number===""){
+		if ($scope.number === ""){
 			$scope.card__number_bullets="card__number_bullets";
 		}
-		else $scope.card__number_bullets="card__number";
+		else $scope.card__number_bullets = "card__number";
 
 		if(/^(34)|^(37)/.test($scope.number)) {
 			$scope.status = "express";
@@ -33,38 +33,36 @@ app.controller("myCtrl",function ($scope,$filter) {
 		}
 	};
 
-	$scope.validateMonth=function () {
-		if($scope.date!==""){
+	$scope.validateMonth = () => {
+		if($scope.date !== ""){
 			var cardDate = $scope.date.replace(/[^\d]/g, '').substring(0,4);
 			cardDate = cardDate !== '' ? cardDate.match(/.{1,2}/g).join('/') : '';
 			$scope.creditDate = cardDate;
 			$scope.date = cardDate;
-			$scope.huge_points="";
-			if($scope.date==="") $scope.huge_points="huge_points";
+			$scope.huge_points = "";
+			($scope.date ==="") ? $scope.huge_points="huge_points" : "";
 		}
 		else {
-			$scope.huge_points="huge_points";
-			$scope.creditDate="";
+			$scope.huge_points = "huge_points";
+			$scope.creditDate = "";
 		}
 	};
 
-	$scope.validateCVC=function () {
-		if($scope.cvc!==""){
-			$scope.huge_points_cvc="";
-			var cardcvc = $scope.cvc.replace(/[^\d]/g, '').substring(0,3);
-			$scope.cvc= cardcvc;
-			if($scope.cvc==="") $scope.huge_points_cvc="huge_points_cvc";
+	$scope.validateCVC = () => {
+		if($scope.cvc !== ""){
+			$scope.huge_points_cvc = "";
+			$scope.cvc = $scope.cvc.replace(/[^\d]/g, '').substring(0,3);
+			($scope.cvc === "") ? $scope.huge_points_cvc = "huge_points_cvc" : "";
 		}
 		else {
-
-			$scope.huge_points_cvc="huge_points_cvc";
+			$scope.huge_points_cvc = "huge_points_cvc";
 		}
 	};
 
-	$scope.showCVC=function () {
-		$scope.flip="flip";
+	$scope.showCVC = () => {
+		$scope.flip = "flip";
 	};
-	$scope.hideCVC=function () {
-		$scope.flip="";
+	$scope.hideCVC = () => {
+		$scope.flip = "";
 	};
 });
